@@ -1,0 +1,52 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "URL Shortner API",
+        "version": "1.0.0",
+        "description": "API for shortening URLs, tracking analytics, and user authentication."
+    },
+    "paths": {
+        "/api/auth/google-signin": {
+            "post": {
+                "summary": "Authentication using Google Sign-In",
+                "requestBody": {
+                    "content":{
+                        "application/json": {
+                            "schema": {"type": "object", "properties":{
+                                "token":{"type":"string"}}}
+                        }
+                    }
+                },
+                "response": {
+                    "200": {
+                        "description": "Authentication successfull"
+                    },
+                    "500": {"description": "Authentication failed"}
+                }
+            }
+        },
+        "/api/url/shorten": {
+            "post": {
+                "summary": "Create a shortened URL",
+                "requestBody": {
+                    "content": {
+                        "application/json":{
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "longUrl":{"type":"string"},
+                                    "customAlias":{"type":"string"},
+                                    "topic": {"type":"string"}
+                                }
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    "201": {"description": "Shortened URL created"},
+                    "500": {"description": "Failed to shorten URL"}
+                }
+            }
+        }
+    }
+}
